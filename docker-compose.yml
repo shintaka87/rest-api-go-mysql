@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+  mysql:
+    platform: linux/x86_64
+    image: mysql:latest
+    container_name: mysql_container
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      TZ: "Asia/Tokyo"
+    volumes:
+      - ./my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./init:/docker-entrypoint-initdb.d
+    ports:
+      - "${DB_HOST_PORT}:${DB_CONTAINER_PORT}"
+
+  myapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      MYSQL_HOST: mysql_container
+    container_name: myapp
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/go/src/app
+    ports:
+      - "${PORT}:${PORT}"
+    depends_on:
+      - mysql
