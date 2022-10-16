@@ -8,12 +8,3 @@ func ReturnJsonResponse(w http.ResponseWriter, httpCode int, resMessage []byte) 
 	w.Write(resMessage)
 }
 
-// func CheckContentType(w http.ResponseWriter, contentType string) {
-// 	if contentType != "application/json"{
-// 		resMessage := []byte(`{
-// 			"message": "Invalid content-type: content-type should be 'application/json'"
-// 		}`)
-// 		ReturnJsonResponse(w, http.StatusBadRequest, resMessage)
-// 		return
-// 	}
-// }
