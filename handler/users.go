@@ -45,6 +45,11 @@ func GetUsers(w http.ResponseWriter, r *http.Request) {
 }
 
 func CreateUser(w http.ResponseWriter, r *http.Request) {
+	if contentType := r.Header.Get("Content-Type"); contentType != "application/json"{
+		utils.ReturnJsonResponse(w, http.StatusBadRequest, utils.InvalidContentType)
+		return
+	}
+
 	stmt, err := db.Db.Prepare("INSERT INTO users(name, created_at, updated_at) VALUES(?, ?, ?)")
 	if err != nil {
 		log.Println(fmt.Errorf("error at Query: %w", err))
@@ -65,11 +70,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 		log.Println(fmt.Errorf("error at stmt.Exec: %w", err))
 	}
 
-	resMessage := []byte(`{
-		"message": "User is created!"
-	}`)
-
-	utils.ReturnJsonResponse(w, http.StatusCreated, resMessage)
+	utils.ReturnJsonResponse(w, http.StatusCreated, utils.UserCreateSuccess)
 
 }
 
@@ -93,10 +94,16 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Println(fmt.Errorf("error at JSONMarshal: %w", err))
 	}
+
 	utils.ReturnJsonResponse(w, http.StatusOK, userJSON)
 }
 
 func UpdateUser(w http.ResponseWriter, r *http.Request) {
+	if contentType := r.Header.Get("Content-Type"); contentType != "application/json" {
+		utils.ReturnJsonResponse(w, http.StatusBadRequest, utils.InvalidContentType)
+		return
+	}
+
 	params := mux.Vars(r)
 
 	stmt, err := db.Db.Prepare("UPDATE users SET name = ?, updated_at = ? WHERE id = ?")
@@ -118,10 +125,7 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 		log.Println(fmt.Errorf("error at stmt.Exec: %w", err))
 	}
 
-	resMessage := []byte(`{
-		"message": "User is updated!"
-	}`)
-	utils.ReturnJsonResponse(w, http.StatusAccepted, resMessage)
+	utils.ReturnJsonResponse(w, http.StatusAccepted, utils.UserUpdateSuccess)
 }
 
 func DeleteUser(w http.ResponseWriter, r *http.Request) {
