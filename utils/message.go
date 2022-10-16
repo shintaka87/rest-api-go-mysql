@@ -8,4 +8,5 @@ var(
 	UserCreateSuccess = []byte(`{"message": "User is created!"}`)
 	UserUpdateSuccess = []byte(`{"message": "User is updated!"}`)
 	UserDeleteSuccess = []byte(`{"message": "User is deleted!"}`)
+	UserDeleteSuccess2 = []byte(`{"message": "User is deleted!!"}`)
 )
