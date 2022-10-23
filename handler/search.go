@@ -32,6 +32,8 @@ func SearchPost(w http.ResponseWriter, r *http.Request) {
 		log.Println(fmt.Errorf("error at Query: %w", err))
 	}
 
+	defer result.Close()
+
 	for result.Next() {
 		var post models.Post
 		err := result.Scan(&post.ID, &post.Title, &post.UserID, &post.CreatedAt, &post.UpdatedAt)
