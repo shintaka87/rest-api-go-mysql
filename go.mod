@@ -7,3 +7,10 @@ require (
 	github.com/gorilla/mux v1.8.0
 	github.com/joho/godotenv v1.4.0
 )
+
+require (
+	github.com/sqs/goreturns v0.0.0-20181028201513-538ac6014518 // indirect
+	golang.org/x/mod v0.6.0 // indirect
+	golang.org/x/sys v0.1.0 // indirect
+	golang.org/x/tools v0.1.12 // indirect
+)

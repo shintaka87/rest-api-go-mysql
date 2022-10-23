@@ -1,11 +1,20 @@
 package utils
 
-var(
-	InvalidContentType = []byte(`{"message":"content-type should be 'application/json'"}`)
-	PostCreateSuccess = []byte(`{"message": "Post is created!"}`)
-	PostUpdateSuccess = []byte(`{"message": "Post is updated!"}`)
-	PostDeleteSuccess = []byte(`{"message": "Post is deleted!"}`)
-	UserCreateSuccess = []byte(`{"message": "User is created!"}`)
-	UserUpdateSuccess = []byte(`{"message": "User is updated!"}`)
-	UserDeleteSuccess = []byte(`{"message": "User is deleted!"}`)
+var (
+	InvalidContentType  = []byte(`{"message":"content-type should be 'application/json'"}`)
+	PostCreateSuccess   = []byte(`{"message": "Post is created!"}`)
+	PostUpdateSuccess   = []byte(`{"message": "Post is updated!"}`)
+	PostDeleteSuccess   = []byte(`{"message": "Post is deleted!"}`)
+	UserCreateSuccess   = []byte(`{"message": "User is created!"}`)
+	UserUpdateSuccess   = []byte(`{"message": "User is updated!"}`)
+	UserDeleteSuccess   = []byte(`{"message": "User is deleted!"}`)
+	PostNotFound        = []byte(`{"message": "Post is not found!"}`)
+	TitleIsEmpty        = []byte(`{"message": "Title should not be empty!"}`)
+	TitleOrIdIsEmpty    = []byte(`{"message": "Both title and user_id should not be empty!"}`)
+	UserIdNotFound      = []byte(`{"message": "User is not found! user_id is incorrect!"}`)
+	NameOrEmailIsEmpty  = []byte(`{"message": "Both User name and username should not be empty!"}`)
+	InvalidEmail        = []byte(`{"message": "This email is already in use!"}`)
+	UserNotFound        = []byte(`{"message": "User is not found"}`)
+	NameAndEmailIsEmpty = []byte(`{"message": "Both name and email is empty!"}`)
+	NoSearchResult      = []byte(`{"message": "There are no search results"}`)
 )
