@@ -3,7 +3,6 @@ package handler
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"rest-api-go-mysql/db"
@@ -12,19 +11,11 @@ import (
 )
 
 func SearchPost(w http.ResponseWriter, r *http.Request) {
-	contentType := r.Header.Get("Content-Type")
-	if contentType != "application/json" {
-		utils.ReturnJsonResponse(w, http.StatusBadRequest, utils.InvalidContentType)
+	params := r.URL.Query()
+	word := params.Get("word")
+	if word == "" {
 		return
 	}
-
-	body, err := ioutil.ReadAll(r.Body)
-	if err != nil {
-		log.Println(fmt.Errorf("error at ReadAll: %w", err))
-	}
-	Keyval := make(map[string]string)
-	json.Unmarshal(body, &Keyval)
-	word := Keyval["word"]
 	var posts []models.Post
 
 	result, err := db.Db.Query("SELECT * FROM posts WHERE title LIKE CONCAT('%', ?, '%')", word)

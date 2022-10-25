@@ -34,7 +34,7 @@ func main() {
 	router.HandleFunc("/users/{id}", handler.GetUser).Methods("GET")
 	router.HandleFunc("/users/{id}", handler.UpdateUser).Methods("PUT")
 	router.HandleFunc("/users/{id}", handler.DeleteUser).Methods("DELETE")
-	router.HandleFunc("/search", handler.SearchPost).Methods("POST")
+	router.HandleFunc("/search", handler.SearchPost).Methods("GET")
 
 	http.ListenAndServe(os.Getenv("GO_PORT"), router)
 }
