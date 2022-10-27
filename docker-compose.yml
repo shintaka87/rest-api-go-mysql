@@ -10,7 +10,8 @@ services:
       MYSQL_DATABASE: ${DB_NAME}
       TZ: "Asia/Tokyo"
     volumes:
-      - ./my.cnf:/etc/mysql/conf.d/my.cnf
+      # - ./my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./my.cnf:/var/lib/mysql
       - ./init:/docker-entrypoint-initdb.d
     ports:
       - "${DB_HOST_PORT}:${DB_CONTAINER_PORT}"
