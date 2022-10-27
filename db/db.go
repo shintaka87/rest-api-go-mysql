@@ -2,6 +2,7 @@ package db
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 	"os"
 
@@ -22,5 +23,8 @@ func init() {
 	Db, err = sql.Open("mysql", os.Getenv("DNS"))
 	if err != nil {
 		panic(err.Error())
+	}
+	if err := Db.Ping(); err != nil {
+		log.Println(fmt.Errorf("ping error: %w", err))
 	}
 }
